@@ -1,13 +1,16 @@
 
 name: TEMPLATE_PYTHON_PACKAGE Image Builder
 
-# Publish on new pushed, and build on Monday Morning (UTC) regardless.
-# on:
-#   push:
-#     branches:
-#       - 'main'
-#   schedule:
-#     - cron:  '4 0 * * MON'
+on:
+  push:
+    branches:
+      - 'CHANGEME'
+    paths-ignore:
+      - '**/README.md'
+      - 'templates/**'
+      - ".github/workflows/versionator.yml"
+  schedule:
+    - cron:  '4 0 * * MON'
 
 jobs:
   Uvicorn-Builder:
@@ -16,7 +19,7 @@ jobs:
       fail-fast: false
       matrix:
         python_versions: ["3.8", "3.9", "3.10"]
-        package_versions: []
+        package_versions: ["0.0.1"]
         target_base: ["full", "slim", "alpine"]
     steps:
       - name: Checkout repository
@@ -32,3 +35,8 @@ jobs:
           target_base: ${{ matrix.target_base }}
           package_version: ${{ matrix.package_versions }}
           registry_password: ${{ secrets.GITHUB_TOKEN }}
+
+          # Uncomment to use local docker files instead of action ones.
+          #dockerfile: "${{ github.workspace }}/dockerfile"
+          #docker_build_path: "${{ github.workspace }}/"
+
