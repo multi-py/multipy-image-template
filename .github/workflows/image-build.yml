@@ -18,8 +18,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python_versions: ["3.8", "3.9", "3.10"]
-        package_versions: ["0.0.1"]
+        python_versions: ["3.6", "3.7", "3.8", "3.9", "3.10"] 
+        package_versions: ["0.1.0", "0.1.1"]
         target_base: ["full", "slim", "alpine"]
     steps:
       - name: Checkout repository
@@ -29,7 +29,7 @@ jobs:
         uses: multi-py/action-python-image-builder@main
         with:
           package: "TEMPLATE_PYTHON_PACKAGE"
-          package_latest_version: ""
+          package_latest_version: "0.1.1"
           maintainer: "Robert Hafner <tedivm@tedivm.com>"
           python_version: ${{ matrix.python_versions }}
           target_base: ${{ matrix.target_base }}
