@@ -1,6 +1,33 @@
 # TEMPLATE_PYTHON_PACKAGE
 
 
+## Benefits
+
+### Multi Architecture Builds
+
+Every tag in this repository supports these architectures:
+
+* linux/amd64
+* linux/arm64
+* linux/arm/v7
+
+
+### Small Images via Multi Stage Builds
+
+All libraries are compiled in one image before being moved into the final published image. This keeps all of the build tools out of the published container layers.
+
+### No Rate Limits
+
+This project uses the Github Container Registry to store images, which have no rate limiting on pulls (unlike Docker Hub).
+
+### Rapid Building of New Versions
+
+Within 30 minutes of a new release to TEMPLATE_PYTHON_PACKAGE on PyPI builds will kick off for new containers. This means new versions can be used in hours, not days.
+
+### Regular Updates
+
+Containers are rebuilt weekly in order to take on the security patches from upstream containers.
+
 
 
 ## Python Versions
