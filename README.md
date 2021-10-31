@@ -28,6 +28,44 @@ Within 30 minutes of a new release to TEMPLATE_PYTHON_PACKAGE on PyPI builds wil
 
 Containers are rebuilt weekly in order to take on the security patches from upstream containers.
 
+## How To
+
+### Full
+To pull the latest slim version:
+
+```bash
+docker pull ghcr.io/multi-py/multipy-image-template:py3.10-LATEST
+```
+
+To include it in the dockerfile instead:
+
+```dockerfile
+FROM ghcr.io/multi-py/multipy-image-template:py3.10-LATEST
+```
+
+### Slim
+
+To pull the latest slim version:
+
+```bash
+docker pull ghcr.io/multi-py/multipy-image-template:py3.10-slim-LATEST
+```
+
+To include it in the dockerfile instead:
+
+```dockerfile
+FROM ghcr.io/multi-py/multipy-image-template:py3.10-slim-LATEST
+```
+
+### Copy Just the Packages
+It's also possible to copy just the Python packages themselves. This is particularly useful when you want to use the precompiled libraries from multiple containers.
+
+```dockerfile
+FROM python:3.10
+
+COPY --from=ghcr.io/multi-py/multipy-image-template:py3.10-slim-LATEST /usr/local/lib/python3.10/site-packages/* /usr/local/lib/python3.10/site-packages/
+```
+
 
 
 ## Python Versions
